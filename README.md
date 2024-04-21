@@ -10,4 +10,4 @@ This is a one page application that helps the user organize their task list and 
 ## Links
 https://github.com/magtron3030/task-board
 
-https://magtron3030.github.io/personal.blog/
+https://magtron3030.github.io/task-board/
