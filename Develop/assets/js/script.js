@@ -1,6 +1,4 @@
-// Retrieve tasks and nextId from localStorage
-
-
+//global variables
 const taskTitle = $('#taskTitle');
 const dueDate = $('#dueDate')
 const taskDescription = $("#description")
@@ -12,7 +10,7 @@ const swimLane = $(".swim-lanes")
 
 
 
-
+//getting and saving to local storage as well as giving each card that generated a random id so they can be targeted individually
 function readTaskFromStorage() {
     let string = localStorage.getItem("taskList")
     let taskList = JSON.parse(string)||[];
@@ -36,6 +34,7 @@ function generateTaskId() {
 
 
 // Todo: create a function to create a task card
+//this is building the actual card. the body, header and then each piece of information that will be displayed on it including the delete button
 function createTaskCard(task) {
     const taskCard = $('<div>')
     .addClass('card task-card draggable my-3')
@@ -56,6 +55,8 @@ function createTaskCard(task) {
     const taskDueDate = dayjs(task.due, 'DD/MM/YYYY');
 
     // ? If the task is due today, make the card yellow. If it is overdue, make it red.
+    //warning means yellow and danger is red. Changed the text to white otherwise it is black by default
+    //is same and is after classifys if the task is on the same day or after the due date which helps determine the color
     if (now.isSame(taskDueDate, 'day')) {
       taskCard.addClass('bg-warning text-white');
     } else if (now.isAfter(taskDueDate)) {
@@ -64,17 +65,18 @@ function createTaskCard(task) {
     }
   }
 
-  // ? Gather all the elements created above and append them to the correct elements.
+  //Gather all the elements created above and append them to the correct elements.
   cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
   taskCard.append(cardHeader, cardBody);
 
-  // ? Return the card so it can be appended to the correct lane.
+  //Return the card so it can be appended to the correct lane.
   return taskCard;
 }
 
 
 
 // Todo: create a function to render the task list and make cards draggable
+//first section is making the card, then a for loop needs to be made to filter through each step of the card
 function renderTaskList() {
   const taskList = readTaskFromStorage();
     
@@ -96,7 +98,7 @@ function renderTaskList() {
         doneList.append(createTaskCard(task));
     }
   }
-
+//need this to make it draggable using jquery ui
   $('.draggable').draggable({
     opacity: 0.7,
     zIndex: 100,
