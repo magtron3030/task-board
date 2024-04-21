@@ -75,8 +75,8 @@ function createTaskCard(task) {
 
 
 
-// Todo: create a function to render the task list and make cards draggable
-//first section is making the card, then a for loop needs to be made to filter through each step of the card
+
+//first section is making "lanes" where the card will be placed, then a for loop needs to be made to filter through each step
 function renderTaskList() {
   const taskList = readTaskFromStorage();
     
@@ -113,6 +113,8 @@ function renderTaskList() {
   });
 }
 
+
+//this function helps with adding the new tasks
 function handleAddTask(){
     const title = taskTitle.val();
     const due = dueDate.val();
@@ -137,7 +139,7 @@ function handleAddTask(){
 }
 
 
-// Todo: create a function to handle deleting a task
+//this is the function for deleting each task from storage
 function handleDeleteTask(){
     const taskId = $(this).attr("data-task-id");
     const taskList = readTaskFromStorage();
@@ -157,7 +159,7 @@ renderTaskList();
 
 
 
-// Todo: create a function to handle dropping a task into a new status lane
+//this handle drop functions allows the task itme to be dropped into a new area
 function handleDrop(event, ui) {
     const tasks = readTaskFromStorage();
     const taskId = ui.draggable[0].dataset.taskId;
@@ -182,7 +184,11 @@ exampleModle.on("click", ".addButton", function (event){
     exampleModle.modal("hide");
 })
 
+
+
 swimLane.on("click", ".delete", handleDeleteTask);
+
+
 
 $(document).ready(function () {
     // ? Print project data to the screen on page load if there is any
